@@ -1,0 +1,35 @@
+body {
+    background-color: #8dacc9 !important;  
+    font-family: 'PoppinsRegular';
+  }
+.nav-link:hover{
+background-color: #3379a8 !important;
+}
+nav#sidebarMenu { 
+    background-color:#014a5c !important;  
+  }
+  .nav-title, .nav-title:hover{
+    color: #c7d132;
+  }
+  .fixed-footer{      
+    background: #3379a8;
+  }
+  .btn.btn-danger.btn-sm.context-menu {
+    background-color: #014a5c;
+    border-color: #014a5c;
+}
+.sidebar .nav-link { 
+    color: #fff; 
+  }
+  
+  #breadPage{
+    color: white !important;
+  }
+  .fixed-footer{      
+    background: #3379a8;
+  }
+
+  .bg-dark {
+    background-color: #3379a8 !important;
+}
+

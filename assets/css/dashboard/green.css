@@ -1,0 +1,47 @@
+body {
+    background-color: #a4c98d !important;  
+    font-family: 'PoppinsRegular';
+  }
+.nav-link:hover{
+background-color: #162613!important;
+}
+nav#sidebarMenu { 
+    background-color:#015c14 !important;  
+  }
+  .nav-title, .nav-title:hover{
+    color: #e9ed0c;
+  }
+  .fixed-footer{      
+    background: #73bf44;
+  }
+  .btn.btn-danger.btn-sm.context-menu {
+    background-color: #015c14;
+    border-color: #015c14;
+}
+.sidebar .nav-link { 
+    color: #fff; 
+  }
+  
+  #breadPage{
+    color: white !important;
+  }
+  .fixed-footer{      
+    background: #73bf44;
+  }
+
+  .bg-dark {
+    background-color: #73bf44 !important;
+}
+
+
+.table-hover>tbody>tr.even:hover>*{
+    color:#FFFFFF !important;
+    background-color: #0f8005 !important;
+  }
+  .table-hover>tbody>tr.odd:hover>*{
+    color:#FFFFFF !important;
+    background-color: #0f8005 !important;
+  }
+  .table-hover>tbody>tr:hover>td>*{
+    color:#FFFFFF !important;
+  }
