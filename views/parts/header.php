@@ -24,7 +24,7 @@
     <script src="<?php echo(ASSETS_URL); ?>vendors/datatables.net/jquery.dataTables.js"></script>
     <script src="<?php echo(ASSETS_URL); ?>vendors/datatables.net-bs4/dataTables.bootstrap4.js"></script>
     <script src="<?php echo(ASSETS_URL); ?>js/jquery-ui.min.js" ></script>  
-     <title>project</title>
+     <title>SLD- Payment Gateway</title>
   
   <link rel="stylesheet" href="<?php echo(ASSETS_URL); ?>css/dashboard/main.css">
   
@@ -69,7 +69,7 @@
 <body>    
   <div id ="appendScript" class="hide"></div>
     <?php 
-      if(empty($_SESSION['pgx']["UserMainID"]))
+      if(empty($_SESSION['pgx']["CompanyUserID"]))
       {
         header("Location:".BASE_URL."login"); 
       } 
@@ -93,7 +93,7 @@
               <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-6">              
 
-                  <h5 class="breadHead" style="font-size: 14px"><?php echo strtoupper($_SESSION['pgx']["NavTitle"]); ?> <?php echo $_SESSION['RepName']; ?></h5>
+                  <!-- <h5 class="breadHead" style="font-size: 14px"><?php echo strtoupper($_SESSION['pgx']["NavTitle"]); ?> <?php echo $_SESSION['RepName']; ?></h5> -->
                 </div>
                 <div class="col-lg-12 col-md-10 col-sm-10">
                     <nav aria-label="breadcrumb">
@@ -111,7 +111,47 @@
 
             <div class="col-lg-4 col-md-4 col-sm-1 col-1 pt-2" id="activitylog"> 
               <div class=" breadHead"  ><div class="float-right btn btn-danger context-menu pointerView pgx_btn" id="typ" >
-            <?php echo $_SESSION['pgx']["TypeRep"];?></div>  </div>
+            <?php echo $_SESSION['pgx']["TypeRep"];?></div>  
+            <div class="breadHead">
+                <?php
+                    if($_SESSION['pgx']["CompanyOfficeID"] =='') {  ?>
+                        <p class="officeUserLink" style="width: 168px;">
+                          <!-- <span class="officeLabel">
+                            Office
+                          </span> -->
+                          <span class="officeSelect flash blink" id="offSpan">
+                            <select class="form-select tableinput_fields changefilter" id="userOfficeLink" name="userOfficeLink" style="width: 120px;border: 2px solid #eaa73a;border-radius: .25rem;">
+                                <option value=''>Select Office</option>
+                            </select>
+                          </span>
+                        </p>
+                        <span class="officeName"></span> 
+
+                <?php }else{ ?>
+                            <span id="offName" class="OfficeModule"><?php echo($_SESSION['pgx']["CompanyOfficeName"]); ?> 
+                            </span>
+                      </span>
+                        
+                <?php }  
+                  // <!-- SELECT PAYMENT GATEWAY  -->
+                  if($_SESSION['pgx']["PayGateID"] =='') {  ?>
+                  <p class="pgy" style="width: 168px;">
+                    <!-- <span class="">
+                    Payment Gateway 
+                    </span> -->
+                    <span>
+                      <select class="form-select tableinput_fields changefilter" id="paymentGateway" name="paymentGateway" style="width: 120px;border: 2px solid #eaa73a;border-radius: .25rem;">
+                        <option value=''>Select Payment Gateway</option>
+                      </select>
+                    </span>
+                  </p>
+                  <span class="paygateName"></span>
+                  <?php }else{ ?>
+                            <span id="offName" class="OfficeModule"><?php echo(" - ".$_SESSION['pgx']["PaymentGatewayName"]); ?> 
+                            </span>  
+                <?php } ?>
+              </div> 
+          </div>
 
             </div>
             <div class="col-lg-1 col-md-1 col-sm-1 col-2 pt-2 ">

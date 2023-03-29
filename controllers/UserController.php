@@ -37,33 +37,32 @@ class UserController  extends  UserBaseController
 
     
     public function dashboardAction()
-    {  
-
-      
-        if(isset($_SESSION['pgx']["UserID"])||$_SESSION['pgx']["UserMainID"]){
-           
-
-        $menuData['breadhome'] = 'General';
-        $menuData['breadpage'] = '';
-        $layout=true;
-        if($_SERVER["REQUEST_METHOD"] == 'POST')
-        {         
-            if( $_POST['dAccess'] =="dashboard") {
-                $layout =false;
+    {   
+        if(isset($_SESSION['pgx']["loggedIn"])&&$_SESSION['pgx']["UserLoginID"]){ 
+            $menuData['breadhome'] = 'General';
+            $menuData['breadpage'] = '';
+            $layout=true;
+            if($_SERVER["REQUEST_METHOD"] == 'POST')
+            {    
+                if( $_POST['dAccess'] =="dashboard") { 
+                    $layout =false;
+                }         
+            }
+            if($layout){      
+                $this->loadView("parts/header",[],$menuData);
             }         
-        }
-        if($layout){                    
-            $this->loadView("parts/header",[],$menuData);
-        }         
             $data =[];
-            $this->loadView("system/pages/dashboard",$data);           
-            $this->loadView("parts/footer",[]); 
-        } else {
+            $this->loadView("system/pages/dashboard",$data);   
             
-            $this->loadView("login/header");   
-            $this->loadView("login/index"); 
-            $data["scripts"] = ["system/login"];  
-            $this->loadView("login/footer",$data);  
+            if($layout){   
+                $data["scripts"] = ["system/chooseoffice"];            
+                $this->loadView("parts/footer",$data); 
+            }
+        } else { 
+                $this->loadView("login/header");   
+                $this->loadView("login/index"); 
+                $data["scripts"] = ["system/login"];  
+                $this->loadView("login/footer",$data);  
         }
     }
 
