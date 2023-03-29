@@ -1,13 +1,12 @@
 <?php
-require_once  MODEL_BASE_PATH."Database.php"; 
-class  CrudModel extends Database
+require_once  MODEL_BASE_PATH."ACCDatabase.php"; 
+class  ERPAccountsDBCrudModel extends ACCDatabase
 {
     function __construct(){
-        $this->db = new Database();
-    }
-    
+        $this->db = new ACCDatabase(); 
+    } 
     public function getPageTableName($TableName = "")
-    {
+    {  
         $where = "WHERE TableName = '".$TableName."' ";
         $page = $this->detailsRow("000_tables",$where);
         if(!empty($page) || $pageName =""){
@@ -55,7 +54,8 @@ class  CrudModel extends Database
             $items = "*";
         }
         $sqlQuery = "SELECT ".$items." FROM  ".$table;
-        $sqlQuery .= ($conditions)?(" ".$conditions):" "; 
+        $sqlQuery .= ($conditions)?(" ".$conditions):" ";
+        // die($sqlQuery );  
         $result = $this->db->executeQuery($sqlQuery);
         return($result);
     }
@@ -105,10 +105,10 @@ class  CrudModel extends Database
         }
     }
     public function detailsRow($table,$conditions)
-    {
+    { 
         $sqlQuery = "SELECT * FROM ".$table;        
         $sqlQuery .= ($conditions)?(" ".$conditions):" ";
-        $sqlQuery .= " LIMIT 1";
+        $sqlQuery .= " LIMIT 1";  
         $result = $this->db->executeQuery($sqlQuery);
         if(!empty($result)){            
               return($result[0]);

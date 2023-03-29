@@ -1076,16 +1076,7 @@ $.validator.addMethod( "nipPL", function( value ) {
 	return ( intControlNr === parseInt( value[ 9 ], 10 ) );
 }, "Please specify a valid NIP number." );
 
-/**
- * Created for project jquery-validation.
- * @Description Brazillian PIS or NIS number (Número de Identificação Social Pis ou Pasep) is the equivalent of a
- * Brazilian tax registration number NIS of PIS numbers have 11 digits in total: 10 numbers followed by 1 check numbers
- * that are being used for validation.
- * @copyright (c) 21/08/2018 13:14, Cleiton da Silva Mendonça
- * @author Cleiton da Silva Mendonça <cleiton.mendonca@gmail.com>
- * @link http://gitlab.com/csmendonca Gitlab of Cleiton da Silva Mendonça
- * @link http://github.com/csmendonca Github of Cleiton da Silva Mendonça
- */
+ 
 $.validator.addMethod( "nisBR", function( value ) {
 	var number;
 	var cn;

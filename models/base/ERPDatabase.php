@@ -1,24 +1,18 @@
 <?php
 
-class ForeignKeyException extends Exception {
+class ForeignKeyExceptions extends Exception {
     public function __construct($msg = 0, $code = 0) {
         parent::__construct($msg, $code);
     }
 }
-
-
-class Database
+class ERPDatabase
 { 
     protected $connection = null;
  
     public function __construct()
     {
         try {
-            if(isset($_SESSION['pgx']["UserID"])){
-                $this->connection = new mysqli(DB_HOST, USERNAME, DB_PASSWORD, DB_DATABASE_NAME);
-            }else{
-                $this->connection = new mysqli(ERP_DB_HOST, ERP_DB_USERNAME, ERP_DB_PASSWORD, ERP_DB_DATABASE_NAME);  
-            }
+            $this->connection = new mysqli(ERP_DB_HOST, ERP_DB_USERNAME, ERP_DB_PASSWORD, ERP_DB_DATABASE_NAME);
             mysqli_query($this->connection,"SET CHARACTER SET 'utf8'");
             mysqli_query($this->connection,"SET SESSION collation_connection ='utf8_unicode_ci'");
             if ( mysqli_connect_errno()) {
@@ -31,6 +25,7 @@ class Database
  
     public function select($query = "" , $params = [])
     {   
+        
         try {
             $stmt = $this->executeStatement( $query );
             $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);               
@@ -138,19 +133,26 @@ class Database
         }   
     }
     public function htmlRealEscapeString($TextInput){
+       
         if(!empty($TextInput)){
             if(is_array($TextInput)){
-                foreach($TextInput as $singleInput){
-                    $DataString = mysqli_real_escape_string($this->connection,$singleInput);
-                    return $DataString;
-                }
+                foreach($TextInput as $singleInput)
+                    {
+                        $DataString = mysqli_real_escape_string($this->connection,$singleInput);
+                        return $DataString;
+                    }
             }
             else{
+              
                 $DataString = mysqli_real_escape_string($this->connection,$TextInput);
                 return $DataString;
+             }
+             
             }
+             
             
         }
+     
         
-    }
+    
 }

@@ -10,18 +10,8 @@
 	}
   } 
 
-$(document).ready(function(){
-
-	
-	$("#refrsh").click(function(e){
-		$("#userType1").attr('checked', false);
-		$("#userType2").attr('checked', false);
-		$("#userType3").attr('checked', false);
-		$("#userType4").attr('checked', false);
-	});
-		
-	$("#log-next").click(function(e){
-		alert(1);
+$(document).ready(function(){ 
+	$("#log-next").click(function(e){ 
 		if(($('#Username').length)&&($('#loginForm input[name="Username"]').val() !='')&&($('#loginForm input[name="code"]').val() !='')){			
 			var Username = $('#loginForm input[name="Username"]').val();
 			var code = $('#loginForm input[name="code"]').val();
@@ -81,8 +71,7 @@ $(document).ready(function(){
 			success: function(resultData) { 
 				
 				
-				if(resultData.Status == "1"){
-					
+				if(resultData.Status == "1"){ 
 					window.location = BASEURL+'';	
 				} else { 
 					document.getElementById("err3").innerHTML = "Invalid UserName/Password";
