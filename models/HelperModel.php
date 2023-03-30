@@ -7,11 +7,28 @@ require_once  MODEL_API_PATH . "ERPAccountsDBCrudModel.php";
 class HelperModel extends Database
 {
     function __construct(){ 
-        $this->db = new Database();
-        $this->crudModel = new CrudModel();  
-        $this->ERPAccountsDBCrudModel = new ERPAccountsDBCrudModel();
-        $this->SysUsersTable = $this->crudModel->getPageTableName("SysUsers");   
+      $this->db = new Database();
+      $this->crudModel = new CrudModel();  
+      $this->ERPAccountsDBCrudModel = new ERPAccountsDBCrudModel();  
+      $this->paymentgatewayoffice_link = $this->ERPAccountsDBCrudModel->getPageTableName("paymentgatewayoffice_link"); 
+      $this->paygate_m = $this->ERPAccountsDBCrudModel->getPageTableName("paygate_m");  
     }
+
+    public function loadPaygateByOffice( ){      
+      $this->AccDB = new ACCDatabase();  
+      session_start();
+      $query = 'SELECT `' .$this->paygate_m. '`.* FROM `' .$this->paygate_m. '`';
+      $query .=" INNER JOIN  `".$this->paymentgatewayoffice_link."` ON `".$this->paygate_m."`.PayGateID =`".$this->paymentgatewayoffice_link."`.PayGateID";
+      $query .=" WHERE `".$this->paygate_m."`.`Status` ='1' AND `".$this->paymentgatewayoffice_link."`.CompanyOfficeID  ='".$_SESSION['pgx']['CompanyOfficeID']."' "; 
+      $result = $this->AccDB->executeQuery($query); 
+      if(!empty($result)){            
+            return(json_encode(array("Status"=>1,"data"=>$result,"Message"=>"List fetched successfully")));
+      }
+      else {
+            return(json_encode(array("Status"=>0,"qr"=>$_SESSION, "Message"=>"List fetching Failed")));
+      }      
+    }
+
 
     public function nameByID($table,$ID,$Name)
     {   
@@ -78,19 +95,6 @@ class HelperModel extends Database
             if(!empty($result)){            
                   return($result);
             } 
-      }
-      public function loadPaygateByOffice($smsgatewayofficelink,$paygate_m,$officeID){
-            $this->AccDB = new ACCDatabase();  
-            $query = 'SELECT `' .$paygate_m. '`.* FROM `' .$paygate_m. '`';
-            $query .=" INNER JOIN  `".$smsgatewayofficelink."` ON `".$paygate_m."`.PayGateID =`".$smsgatewayofficelink."`.PayGateID";
-            $query .=" WHERE `".$paygate_m."`.`Status` ='1' AND `".$smsgatewayofficelink."`.CompanyOfficeID  ='".$officeID."' "; 
-            $result = $this->AccDB->executeQuery($query); 
-            if(!empty($result)){            
-                  return(json_encode(array("Status"=>1,"data"=>$result,"Message"=>"List fetched successfully")));
-            }
-            else {
-                  return(json_encode(array("Status"=>0,"Message"=>"List fetching Failed")));
-            }
       }
       public function setPayGateName($paygate_m,$ID,$Name,$SearchCondition){
             $this->AccDB = new ACCDatabase();

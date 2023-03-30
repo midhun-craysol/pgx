@@ -20,7 +20,7 @@
       }
   ?>
 <script src="<?php echo(ASSETS_URL); ?>bootstrap/js/bootstrap-select.min.js" ></script>
-<script src="<?php echo(ASSETS_URL); ?>custom-js/system/password_change_user.js" ></script>
+<script src="<?php echo(ASSETS_URL); ?>custom-js/password_change_user.js" ></script>
 
 <script>
   var ASSETURL = "<?php echo(ASSETS_URL); ?>";
@@ -208,7 +208,18 @@ $("#theme").change(function() {
  
 $(document).ready(function(){
   
+  $(".buttonloader").on("click",function(){ 
+            var url=$(".buttonloader").data("target"); 
+              $('.fa-refresh').addClass('fa-spin');
 
+              setTimeout(function(){
+
+                  var table = $("#"+url).DataTable();
+                  table.ajax.reload();
+                  $('.fa-refresh').removeClass('fa-spin');
+              }, 1010);
+
+          });
   $("#navbarToggleExternalContent1").toggle();
 
   $("#mainContentArea").toggleClass("col-md-12").css("padding-right","0px");

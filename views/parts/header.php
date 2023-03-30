@@ -107,58 +107,33 @@
                 </div>          
               </div>
             </div>
-
-
-            <div class="col-lg-4 col-md-4 col-sm-1 col-1 pt-2" id="activitylog"> 
-              <div class=" breadHead"  ><div class="float-right btn btn-danger context-menu pointerView pgx_btn" id="typ" >
-            <?php echo $_SESSION['pgx']["TypeRep"];?></div>  
-            <div class="breadHead">
+            <div class="col-lg-4 col-md-4 col-sm-1 col-1" id="activitylog"> 
+              <div class="breadHead row">
                 <?php
-                    if($_SESSION['pgx']["CompanyOfficeID"] =='') {  ?>
-                        <p class="officeUserLink" style="width: 168px;">
-                          <!-- <span class="officeLabel">
-                            Office
-                          </span> -->
-                          <span class="officeSelect flash blink" id="offSpan">
-                            <select class="form-select tableinput_fields changefilter" id="userOfficeLink" name="userOfficeLink" style="width: 120px;border: 2px solid #eaa73a;border-radius: .25rem;">
-                                <option value=''>Select Office</option>
-                            </select>
-                          </span>
-                        </p>
-                        <span class="officeName"></span> 
-
-                <?php }else{ ?>
-                            <span id="offName" class="OfficeModule"><?php echo($_SESSION['pgx']["CompanyOfficeName"]); ?> 
-                            </span>
-                      </span>
-                        
+                    if( $_SESSION['pgx']["CompanyOfficeID"] =='') {  ?>  
+                      <select class="form-select  col-lg-6 " id="userOfficeLink" name="userOfficeLink" >
+                          <option value=''>Select Office</option>
+                      </select>
+                <?php }
+                else{ ?>
+                <span  class="selectedItems">Office  :  <?php echo($_SESSION['pgx']["CompanyOfficeName"]); ?> 
+                </span>                        
                 <?php }  
                   // <!-- SELECT PAYMENT GATEWAY  -->
-                  if($_SESSION['pgx']["PayGateID"] =='') {  ?>
-                  <p class="pgy" style="width: 168px;">
-                    <!-- <span class="">
-                    Payment Gateway 
-                    </span> -->
-                    <span>
-                      <select class="form-select tableinput_fields changefilter" id="paymentGateway" name="paymentGateway" style="width: 120px;border: 2px solid #eaa73a;border-radius: .25rem;">
+                  if(  $_SESSION['pgx']["CompanyOfficeID"] !='' ){
+                    if( $_SESSION['pgx']["PayGateID"] =='') {  ?> 
+                      <select class="form-select  col-lg-8" id="paymentGateway" name="paymentGateway"  >
                         <option value=''>Select Payment Gateway</option>
-                      </select>
-                    </span>
-                  </p>
-                  <span class="paygateName"></span>
-                  <?php }else{ ?>
-                            <span id="offName" class="OfficeModule"><?php echo(" - ".$_SESSION['pgx']["PaymentGatewayName"]); ?> 
-                            </span>  
-                <?php } ?>
+                      </select>   
+                  <?php }
+                  else{ ?>
+                  <span  class="selectedItems">Payment Gateway : <?php echo($_SESSION['pgx']["PaymentGatewayName"]); ?> 
+                  </span>  
+                <?php } } ?>
               </div> 
-          </div>
-
             </div>
-            <div class="col-lg-1 col-md-1 col-sm-1 col-2 pt-2 ">
-
-              <div class="text-left base d-none profileDiv" id="LogContent">
-              
-
+            <div class="col-lg-1 col-md-1 col-sm-1 col-2 "> 
+              <div class="text-left base d-none profileDiv" id="LogContent"> 
               <p class="pClass"> &nbsp; <img src="<?php echo(BASE_URL."/assets/images/alert-icons/download.png");  ?>" alt="logo" style="width: 11%;"> &nbsp;<?php echo "".$_SESSION['pgx']["UserName"]; if(isset($_SESSION['pgx']["UserRole"])){?>(<?php echo strtoupper("".$_SESSION['pgx']["UserRole"]);?>)<?php } ?>&nbsp; </p>
               <p  class="pClass"> &nbsp; <img src="<?php echo(BASE_URL."/assets/images/alert-icons/images.png");  ?>" alt="logo" style="width: 8%;"></i>&nbsp;
               <?php $date=date_create($_SESSION['pgx']["lastlogin"]);
@@ -225,55 +200,7 @@
     </header>
 
     
-    <?php
-      if($_SESSION['pgx']["NavTitle"]=='System')
-      {
-        $restClss="";
-        $menuConfig =
-        [ 
-          "Dashboard" =>[ "hasSub" => false ,"url" =>"../pgx"],
-        ];
-  
-        if($_SESSION['pgx']['rootsts']=="NonRootSysUser"){
-             if($_SESSION['pgx']['UserRole']=="sales-admin"){
-                $restClss="";
-               
-            }
-            else{              
-                 $genSub = $menuConfig["General"]["subMenu"];
-                 unset($genSub["Craysol Users"]);
-                 $menuConfig["General"]["subMenu"] = $genSub;
-            }
-
-            if($_SESSION['pgx']["PasswordChangeFlg"]==1){
-              $restClss="restPwdClass";
-              $menuConfig =[ 
-                "Reset Password" =>["hasSub" => false ,"url" =>"#"],
-              ];
-            }
-      }
-    }
-
-    else if($_SESSION['pgx']["NavTitle"]=='Agent')
-    {
-   
-      if($_SESSION['pgx']['rootsts']=="Agent"){
-   
-        if($_SESSION['pgx']["PasswordChangeFlg"]==1){
-          $restClss="restPwdClass";
-          $menuConfig =[ 
-            "Reset Password" =>["hasSub" => false ,"url" =>"#"],
-            ];
-        }
-        else
-        {
-
-          }
-   
-      }
  
-    }
-  ?>
 
 
   <div class="container-fluids" style="padding-left: 15px;">
@@ -282,36 +209,25 @@
     <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
       <div class="position-sticky pt-3 pt-19">
         <ul class="nav flex-column">
-          <?php 
-          if(!empty($menuConfig)){
-            foreach($menuConfig as $menuKey =>$details){
-              if($details["hasSub"] == false){
-                echo('<li class="nav-item">
-                <a class="nav-link '.$restClss.'" id="'.$restClss.'" href="'.BASE_URL.$details["url"].'">
+          <li class="nav-item">
+              <a class="nav-link " id="" href="">
                   <span data-feather="file"></span>
-                 '.$menuKey.'
-                </a>
-              </li>');
-              }
-              else{
-                if(!empty($details['subMenu'])){
-                  echo'<li class="nav-item has-submenu">
-                  <a class="nav-link" href="#"> '.$menuKey.' <i class="fa '.$details['icon'].'"></i></a>
-                  <ul class="submenu collapse">';
-                  foreach($details['subMenu'] as $subKey => $subMenuDetails){ 
-                      echo'<li><a class="nav-link" href="'.$subMenuDetails['url'].'">'.$subKey.' <i class="fa '.$subMenuDetails['icon'].'"></i> </a></li>';
-               
-
-
-                  }
-                  echo'</ul>
-                </li>';
-                }
-              }
-            }
-          }
-          
-          ?>
+                  Dashboard
+              </a>
+          </li>
+          <?php if( $_SESSION['pgx']["CompanyOfficeID"] !='' && $_SESSION['pgx']["PayGateID"] !='') {  ?> 
+          <li class="nav-item has-submenu">
+              <a class="nav-link" href="#"> Payment <i class="fa fa-chevron-circle-down"></i></a>
+              <ul class="submenu collapse">
+                <li>
+                    <a class="nav-link" href="makepayment">Make Payment<i class="fa fa-chevron-circle-plus"></i></a>
+                </li>
+                <li>
+                  <a class="nav-link" href="">Reports  <i class="fa fa-chevron-circle-plus"></i> </a>
+                </li>
+              </ul>
+          </li>    
+          <?php } ?>
         </ul>
         <br>
         <br>
@@ -322,4 +238,4 @@
  
       
     <main class="col-md-12 ms-sm-auto col-lg-12 " id="mainContentArea" >
-    
+

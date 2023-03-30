@@ -1,5 +1,5 @@
 <?php
-require_once  MODEL_PATH."system/SysUserModel.php";
+require_once  MODEL_PATH."SysUserModel.php";
 require_once  MODEL_PATH."HelperModel.php";
 class SysUserController  extends  UserBaseController
 {  
@@ -31,38 +31,38 @@ class SysUserController  extends  UserBaseController
     {
         $requestMethod = $_SERVER["REQUEST_METHOD"];
          
-                if($requestMethod != 'POST'){                    
+        if($requestMethod != 'POST'){                    
 
-                    $this->sendOutput('', array('HTTP/1.1 400 Bad Request'));
+            $this->sendOutput('', array('HTTP/1.1 400 Bad Request'));
 
+        }
+        else
+        {                    
+            $errors = [];                   
+            $fields = ['SysUserID','SysUserPswd']; 
+            $optionalFields = [];
+            $values = [];
+            
+            if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                foreach ($fields as $field) {
+                    if (empty($_POST[$field]) && !in_array($field, $optionalFields)) {
+                        $errors[] = $field;
+                    } else {
+                        $values[$field] = $this->helperModel->InputStringFormat($_POST[$field]);
+                        
+                    }
                 }
-                else
-                {                    
-                    $errors = [];                   
-                    $fields = ['SysUserID','SysUserPswd']; 
-                    $optionalFields = [];
-                    $values = [];
+                    $conditions= "WHERE SysUserID = '".$values['SysUserID']."'"; 
+                    $values['PasswordChangeFlg']=1;
+                    $values['SysUserPswd']=md5($values['SysUserPswd']);
+                    $responseData = $this->crudModel->update($this->table,$values,$conditions);
+
+                    $this->sendOutput($responseData,array('Content-Type: application/json', 'HTTP/1.1 200 OK')
+                    );
                     
-                    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-                        foreach ($fields as $field) {
-                            if (empty($_POST[$field]) && !in_array($field, $optionalFields)) {
-                                $errors[] = $field;
-                            } else {
-                                $values[$field] = $this->helperModel->InputStringFormat($_POST[$field]);
-                                
-                            }
-                        }
-                            $conditions= "WHERE SysUserID = '".$values['SysUserID']."'"; 
-                            $values['PasswordChangeFlg']=1;
-                            $values['SysUserPswd']=md5($values['SysUserPswd']);
-                            $responseData = $this->crudModel->update($this->table,$values,$conditions);
-
-                            $this->sendOutput($responseData,array('Content-Type: application/json', 'HTTP/1.1 200 OK')
-                            );
-                            
-                       
-                }
+                
             }
+        }
     	
     }
    public function listAction()
@@ -98,9 +98,9 @@ class SysUserController  extends  UserBaseController
 
         
         $this->loadView("parts/dataTable",[],$vars);    
-        $this->loadView("system/popups/sys_user_Form"); 
+        $this->loadView("popups/sys_user_Form"); 
         $starttime = microtime(true);      
-        $data["scripts"] = ["system/sysuser","helper/table","helper/form"];        
+        $data["scripts"] = ["sysuser","helper/table","helper/form"];        
         $this->loadView("parts/plain",$data,$menuData); 
         $endtime = microtime(true); 
         echo("<span  class='loadTimeRoad'; > #0004 - <lable>".round(($endtime - $starttime),4)." Sec </label>".round((microtime(true) - $timeStart),4)." Sec </span>");                  

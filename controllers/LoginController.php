@@ -1,5 +1,5 @@
 <?php
-require_once  MODEL_PATH."system/LoginModel.php";
+require_once  MODEL_PATH."LoginModel.php";
 // require_once  MODEL_PATH."HelperModel.php";
 class LoginController  extends  BaseController
 {  
@@ -12,7 +12,7 @@ class LoginController  extends  BaseController
     public function loginAction(){   
         $this->loadView("login/header");   
         $this->loadView("login/index"); 
-        $data["scripts"] = ["system/login"];  
+        $data["scripts"] = ["login"];  
         $this->loadView("login/footer",$data);    
     }
 

@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once  MODEL_PATH."system/LoginModel.php";
+require_once  MODEL_PATH."LoginModel.php";
 class UserController  extends  UserBaseController
 {  
   
@@ -52,16 +52,16 @@ class UserController  extends  UserBaseController
                 $this->loadView("parts/header",[],$menuData);
             }         
             $data =[];
-            $this->loadView("system/pages/dashboard",$data);   
+            $this->loadView("pages/dashboard",$data);   
             
             if($layout){   
-                $data["scripts"] = ["system/chooseoffice"];            
+                $data["scripts"] = ["chooseoffice"];            
                 $this->loadView("parts/footer",$data); 
             }
         } else { 
                 $this->loadView("login/header");   
                 $this->loadView("login/index"); 
-                $data["scripts"] = ["system/login"];  
+                $data["scripts"] = ["login"];  
                 $this->loadView("login/footer",$data);  
         }
     }
