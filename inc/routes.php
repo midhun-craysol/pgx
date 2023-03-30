@@ -4,6 +4,9 @@
   $routes['setOfficeSession'] = "Helper/setOfficeSession";
   $routes['setPayGateSession'] = "Helper/setPayGateSession";
   $routes['loadPaygateByOffice'] = "Helper/loadPaygateByOffice";
+  $routes['getProductLists'] = "Helper/getProductLists";
+  $routes['makepayment'] = "Payment/makePay";
+  $routes['getProductLists'] = "Payment/getProductLists";
   
   $routes['nameByIDWithSearch'] = "Helper/nameByIDWithSearch"; 
   $routes[''] = "User/dashboard";

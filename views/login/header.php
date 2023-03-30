@@ -39,7 +39,7 @@
       }
           body {
         font-size: .875rem;
-        background-color:  #3379a8 !important;
+        background-color:  #7ee0ed66 !important;
       }
 
       .feather {

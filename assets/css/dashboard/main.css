@@ -1211,4 +1211,28 @@ span.codeDet {
 .StateMain{
   width: 261px;
 }
-/* StatusDlr
+.payForm{
+  padding-top: 35px;
+  width: 456px;
+}
+.btn-toolbar.mb-2.mb-md-0.tableActionBtns.pr-1 {
+  position: absolute;
+  right: 8%;
+  z-index: 777;
+}
+.DTableBtns{
+  position: absolute;
+  display: block;    
+  right: 0;
+  margin-top: 4px;
+}
+.dataTables_wrapper .dataTables_filter {
+  position: absolute;
+  right: 38%;
+}
+.DTSectionTop{
+  padding-top: 0px;
+  padding-bottom: 0px;
+  border-bottom: 1px #cccccc solid;
+  margin-bottom: 1%;
+}

@@ -37,7 +37,7 @@
              
                 <div class="auth-form-light1   imageSec text-left py-5 px-4   col-lg-6" >
                   <div class="brand-logo ">
-                    <img src="<?php echo(BASE_URL); ?>assets/images/acclogo.png" alt="logo" style="width: 100%;">
+                    <img src="<?php echo(BASE_URL); ?>assets/images/logo.png" alt="logo" style="width: 100%;">
                   </div>
                   
                 </div>

@@ -1,35 +1,6 @@
 <script>
   pageName ="<?php echo(isset($pageName)? $pageName :''); ?>";
-</script>
-
-<style>
-  /* .btn-toolbar.mb-2.mb-md-0.tableActionBtns.pr-1 {
-    position: absolute;
-    left: 18%;
-    z-index: 777;
-  } */
-  .btn-toolbar.mb-2.mb-md-0.tableActionBtns.pr-1 {
-    position: absolute;
-    right: 8%;
-    z-index: 777;
-  }
-  .DTableBtns{
-    position: absolute;
-    display: block;    
-    right: 0;
-    margin-top: 4px;
-  }
-  .dataTables_wrapper .dataTables_filter {
-    position: absolute;
-    right: 38%;
-  }
-  .DTSectionTop{
-    padding-top: 0px;
-    padding-bottom: 0px;
-    border-bottom: 1px #cccccc solid;
-    margin-bottom: 1%;
-  }
-</style>
+</script> 
   <div class="row">
     <div class="col-lg-12 grid-margin stretch-card">
       <div class="card">
@@ -51,21 +22,7 @@
             }
             ?>
         </div>
-        <div class="clearfix"></div>
-        <!-- <div class="btn-toolbar mb-2 mb-md-0 tableActionBtns float-left  pr-1">
-            <?php
-            //if(isset($filterHtml)){
-              ?>
-              <div class="float-left" >       
-                        <?php
-                        //echo($filterHtml);
-                        ?>
-                </div>
-              <?php
-            //}
-            ?>
-            
-      </div> -->
+        <div class="clearfix"></div> 
       <div class="btn-toolbar mb-2 mb-md-0 tableActionBtns pr-1">
         <?php
             if(isset($filterHtml)){
@@ -126,27 +83,4 @@
         </div>
       </div>
     </div>
-  </div>
-  <script>
-      
-      $( document ).ready(function() {
-          //console.log( "ready!" );
-          
-          $(".buttonloader").on("click",function(){ 
-            var url=$(".buttonloader").data("target");
-              //alert(url);
-              $('.fa-refresh').addClass('fa-spin');
-
-              setTimeout(function(){
-
-                  var table = $("#"+url).DataTable();
-                  table.ajax.reload();
-                  $('.fa-refresh').removeClass('fa-spin');
-              }, 1010);
-
-          });
-
-          
-      });
-
-</script>
+  </div> 

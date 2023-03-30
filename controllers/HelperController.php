@@ -12,9 +12,7 @@ class HelperController  extends  BaseController
         $this->ERPmainDBCrudModel = new ERPmainDBCrudModel();
         $this->helperModel = new HelperModel();
 		$this->usercompanyoffice_link = $this->ERPAccountsDBCrudModel->getPageTableName("usercompanyoffice_link");    
-		$this->paymentgatewayoffice_link = $this->ERPAccountsDBCrudModel->getPageTableName("paymentgatewayoffice_link");   
-		$this->paygate_m = $this->ERPAccountsDBCrudModel->getPageTableName("paygate_m");   
-		$this->paygate_m = $this->ERPAccountsDBCrudModel->getPageTableName("paygate_m");   
+		$this->paygate_m = $this->ERPAccountsDBCrudModel->getPageTableName("paygate_m");    
 		$this->companyoffice_m = $this->ERPmainDBCrudModel->getPageTableName("companyoffice_m");   
     }
 
@@ -99,9 +97,8 @@ class HelperController  extends  BaseController
 	}
 	public function loadPaygateByOfficeAction()
     { 
-    	if(isset($_POST['userOfficeLinkID'])){
-    		$userOfficeLinkID=$_POST['userOfficeLinkID']; 
-	    	$responseData = $this->helperModel->loadPaygateByOffice($this->paymentgatewayoffice_link,$this->paygate_m,$userOfficeLinkID);
+    	if(isset($_POST['yes'])){ 
+	    	$responseData = $this->helperModel->loadPaygateByOffice( );
 	    	$this->sendOutput(
 	            $responseData,
 	            array('Content-Type: application/json', 'HTTP/1.1 200 OK')
@@ -110,6 +107,15 @@ class HelperController  extends  BaseController
     	
     }
 	public function setPayGateSessionAction()
+	{
+		$_SESSION['pgx']["PayGateID"]=$_POST['PayGateID']; 
+		$SearchCondition ="AND PayGateID ='".$_POST['PayGateID']."'";
+		$responseData = $this->helperModel->setPayGateName($this->paygate_m,'PayGateID','PaymentGatewayName',$SearchCondition); 
+		$_SESSION['pgx']["PaymentGatewayName"]= $responseData[0]['PaymentGatewayName']; 
+		echo $responseData[0]['PaymentGatewayName'];
+
+	}
+	public function getProductListsAction()
 	{
 		$_SESSION['pgx']["PayGateID"]=$_POST['PayGateID']; 
 		$SearchCondition ="AND PayGateID ='".$_POST['PayGateID']."'";
