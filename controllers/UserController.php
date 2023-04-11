@@ -12,12 +12,18 @@ class UserController  extends  UserBaseController
 
     }
 
-    public function LogoutAction(){  
-        if(!empty($_SESSION['pgx'])){
-            session_unset();
-            session_destroy();
-            header('Location: login');
-        }   
+    // public function LogoutAction(){  
+    //     if(!empty($_SESSION['pgx'])){
+    //         session_unset();
+    //         session_destroy();
+    //         header('Location: login');
+    //     }   
+    // }
+    public function LogoutAction(){
+        session_start();  
+        unset($_SESSION['pgx']);  
+        // echo "1"; 
+        header('Location: login');         
     }
 
     public function themeAction(){  

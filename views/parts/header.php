@@ -216,7 +216,7 @@
               </a>
           </li>
           <?php if( $_SESSION['pgx']["CompanyOfficeID"] !='' && $_SESSION['pgx']["PayGateID"] !='') {  ?> 
-          <li class="nav-item has-submenu">
+          <!-- <li class="nav-item has-submenu">
               <a class="nav-link" href="#"> Payment <i class="fa fa-chevron-circle-down"></i></a>
               <ul class="submenu collapse">
                 <li>
@@ -226,7 +226,21 @@
                   <a class="nav-link" href="">Reports  <i class="fa fa-chevron-circle-plus"></i> </a>
                 </li>
               </ul>
-          </li>    
+          </li>     -->
+          <li class="nav-item has-submenu">
+              <a class="nav-link" href="#"> Transactions <i class="fa fa-chevron-circle-down"></i></a>
+              <ul class="submenu collapse">
+                <li>
+                    <a class="nav-link" href="transtatus">Check Tran Status<i class="fa fa-chevron-circle-plus"></i></a>
+                </li>
+                <li>
+                  <a class="nav-link" href="newTran">New Tran  <i class="fa fa-chevron-circle-plus"></i> </a>
+                </li>
+                <li>
+                  <a class="nav-link" href="">Send SMS Link  <i class="fa fa-chevron-circle-plus"></i> </a>
+                </li>
+              </ul>
+          </li> 
           <?php } ?>
         </ul>
         <br>

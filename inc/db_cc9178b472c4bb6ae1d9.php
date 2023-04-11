@@ -7,7 +7,7 @@ define("DB_DATABASE_NAME", "pgx");
 define("ERP_DB_HOST", "192.168.3.26:3306");
 define("ERP_DB_USERNAME", "praveen");
 define("ERP_DB_PASSWORD", "Praveen1234$$");
-define("ERP_DB_DATABASE_NAME","erpx_m20"); 
+define("ERP_DB_DATABASE_NAME","erpx_m31"); 
  session_start();
  if(isset($_SESSION['pgx']['compDB_HOST'])){  
   define("COMP_DB_HOST",$_SESSION['pgx']['compDB_HOST']);

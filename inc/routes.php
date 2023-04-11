@@ -6,7 +6,11 @@
   $routes['loadPaygateByOffice'] = "Helper/loadPaygateByOffice";
   $routes['getProductLists'] = "Helper/getProductLists";
   $routes['makepayment'] = "Payment/makePay";
-  $routes['getProductLists'] = "Payment/getProductLists";
+  // $routes['getProductLists'] = "Payment/getProductLists";
+  $routes['transtatus'] = "Transaction/tranStatus";
+  $routes['newTran'] = "Transaction/newTran";
+  
+  
   
   $routes['nameByIDWithSearch'] = "Helper/nameByIDWithSearch"; 
   $routes[''] = "User/dashboard";
@@ -18,4 +22,12 @@
   $routes['verifyLogin'] = "Login/verifyLogin";
   
   $routes['userOfficeList'] = "Helper/userOfficeList"; 
+  
+  $routes['terms'] = "Home/termsAndConditions"; 
+  $routes['privacy'] = "Home/privacy"; 
+  $routes['refund'] = "Home/refund"; 
+  $routes['shipping'] = "Home/shipping"; 
+  $routes['contactus'] = "Home/contactus"; 
+
+  
   ?>
