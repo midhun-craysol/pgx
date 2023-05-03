@@ -33,9 +33,8 @@
 
   </head>
   <script>
-    BASEURL="<?php echo(BASE_URL); ?>";
-    ASSETURL="<?php echo(ASSETS_URL); ?>";
-    ERP_BASE_URL="<?php echo(ERP_BASE_URL); ?>";
+    BASE_URL="<?php echo(BASE_URL); ?>";
+    ASSETS_URL="<?php echo(ASSETS_URL); ?>"; 
     document.addEventListener("DOMContentLoaded", function(){
     document.querySelectorAll('.sidebar .nav-link').forEach(function(element){
       
@@ -80,7 +79,7 @@
         <nav class="navbar navbar-dark bg-dark">
             <div class="row tgNav">
               <div class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggleExternalContent"  aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation" style="border:none;">
-             <img src="<?php echo(BASE_URL."/assets/images/test2.png");  ?>" alt="logo" style="width:50%;" onclick="location.href = '';">  
+             <img src="<?php echo(BASE_URL."/assets/images/test2.png");  ?>" alt="logo" style="width:25%;" onclick="location.href = '';">  
               <span class="navbar-toggler-icon pgx_btn1" style="margin-left:25%;"></span>
                 </div>
 
@@ -109,27 +108,52 @@
             </div>
             <div class="col-lg-4 col-md-4 col-sm-1 col-1" id="activitylog"> 
               <div class="breadHead row">
-                <?php
-                    if( $_SESSION['pgx']["CompanyOfficeID"] =='') {  ?>  
-                      <select class="form-select  col-lg-6 " id="userOfficeLink" name="userOfficeLink" >
+                <?php  
+                   if( $_SESSION['pgx']["CompanyOfficeID"] =='') {  
+                    ?>  
+                      <select class="form-select  col-lg-6 " id="CompanyOfficeID" name="CompanyOfficeID" >
                           <option value=''>Select Office</option>
+                          <?php
+                          if(isset($_SESSION['pgx']["CompanyOfficeList"]) && (!empty($_SESSION['pgx']["CompanyOfficeList"]))){ 
+                              foreach($_SESSION['pgx']["CompanyOfficeList"] as $officeDetails) { ?>
+                                <option value="<?= $officeDetails['CompanyOfficeID'] ?>" data-name="<?= $officeDetails['CompanyOfficeName'] ?>"><?php echo $officeDetails['CompanyOfficeName']; ?></option>
+                              <?php
+                              }
+                          } ?> 
                       </select>
-                <?php }
-                else{ ?>
-                <span  class="selectedItems">Office  :  <?php echo($_SESSION['pgx']["CompanyOfficeName"]); ?> 
-                </span>                        
+                <?php } else {  ?>
+                              <span  class="selectedItems">Office  :  <?php echo ($_SESSION['pgx']["CompanyOfficeName"]); ?> 
+                              </span>                        
                 <?php }  
                   // <!-- SELECT PAYMENT GATEWAY  -->
                   if(  $_SESSION['pgx']["CompanyOfficeID"] !='' ){
-                    if( $_SESSION['pgx']["PayGateID"] =='') {  ?> 
-                      <select class="form-select  col-lg-8" id="paymentGateway" name="paymentGateway"  >
-                        <option value=''>Select Payment Gateway</option>
-                      </select>   
-                  <?php }
-                  else{ ?>
-                  <span  class="selectedItems">Payment Gateway : <?php echo($_SESSION['pgx']["PaymentGatewayName"]); ?> 
-                  </span>  
-                <?php } } ?>
+                    if( $_SESSION['pgx']["PayGateID"] =='') {  
+                      ?> 
+                            <select class="form-select  col-lg-8" id="paymentGateway" name="paymentGateway"  >
+                              <option value=''>Select Payment Gateway</option>
+                              <?php
+                              $PaygListArr = $_SESSION['pgx']["PaygList"]; 
+                              if(isset($PaygListArr) && (!empty($PaygListArr))){ 
+                                  foreach($PaygListArr as $key => $PaygDetails) { 
+                                    if(!empty($PaygDetails)){ 
+                                      foreach($PaygDetails[$_SESSION['pgx']["CompanyOfficeID"]] as $key2 => $val) {  ?>
+                                          <option value="<?= $val['PayGateID'] ?>" data-name="<?= $val['PaymentGatewayName'] ?>"><?php echo $val['PaymentGatewayName']; ?></option>
+                                      <?php
+                                        // if (!array_key_exists($key2,$_SESSION['pgx']['payGateDet'])){ 
+                                            $_SESSION['pgx']['payGateDet'][$key2][] = $val;
+                                        // }
+                                      }
+                                    }
+                                }
+                              } ?> 
+                            </select>   
+                  <?php }else { ?>
+                                <span  class="selectedItems">Payment Gateway : <?php echo($_SESSION['pgx']["PaymentGatewayName"]); ?> 
+                                </span>  
+                                        <?php 
+                              } 
+                  }  
+              ?>
               </div> 
             </div>
             <div class="col-lg-1 col-md-1 col-sm-1 col-2 "> 
@@ -241,7 +265,7 @@
                 </li>
               </ul>
           </li> 
-          <?php } ?>
+          <?php   } ?>
         </ul>
         <br>
         <br>
@@ -253,3 +277,6 @@
       
     <main class="col-md-12 ms-sm-auto col-lg-12 " id="mainContentArea" >
 
+<?php
+//  print_r($_SESSION['pgx']); 
+ ?>

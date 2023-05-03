@@ -14,7 +14,7 @@ if(pageTable=='CountryTable' || pageTable=='StateTable' || pageTable=='CallActiv
 		'pageLength': 50,	
 		// "destroy": true,
 		'ajax': {
-			'url':BASEURL+ajaxUrl
+			'url':BASE_URL+ajaxUrl
 		},
 		'columns': columnx ,
 		"columnDefs": [
@@ -32,7 +32,7 @@ else{
 		'ordering' : true,
 		"destroy": true,
 		'ajax': {
-			'url':BASEURL+ajaxUrl
+			'url':BASE_URL+ajaxUrl
 		},
 		'columns': columnx ,
 		"columnDefs": [
@@ -63,7 +63,7 @@ function loadDataTableWithFilter(tableID ,fields,ajaxUrl,notSortIndex= [0,-2,-1]
 		'serverMethod': 'post',
 		"pageLength": 50,
 		'ajax': {
-			'url':BASEURL+ajaxUrl,
+			'url':BASE_URL+ajaxUrl,
             'data':filterObj
 		},
 		'columns': columnx ,
@@ -90,7 +90,7 @@ function loadDataTableSOrtable(tableID ,fields,ajaxUrl,notSortIndex= [0,-2,-1]){
 		'serverMethod': 'post',
 		"pageLength": 50,
 		'ajax': {
-			'url':BASEURL+ajaxUrl,
+			'url':BASE_URL+ajaxUrl,
 		},
 		createdRow: function(row, data, dataIndex, cells) {
 			console.log("data",dataIndex);

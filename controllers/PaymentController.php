@@ -7,7 +7,60 @@ class PaymentController  extends  UserBaseController
         $this->crudModel = new CrudModel();
         $this->SysUserModel = new SysUserModel();
         $this->helperModel = new HelperModel();        
+        // $this->table = "payment";
+       $this->table = $this->crudModel->getPageTableName("payments");
+
         
+    }
+    public function addpaymentAction(){
+        $requestMethod = $_SERVER["REQUEST_METHOD"];
+        if($requestMethod != 'POST'){     
+            $this->sendOutput('', array('HTTP/1.1 400 Bad Request'));
+        }
+        else
+        {        
+            $errors = [];
+            $fields = ["RazorpayPaymentId","TotalAmount","ProductId","CompanyOfficeID"]; 
+            $optionalFields = [];
+            $values = [];                    
+            if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                foreach ($fields as $field) {
+                    if (empty($_POST[$field]) && !in_array($field, $optionalFields)) {
+                        $errors[] = $field;
+                    } else {
+                            $values[$field] = $this->helperModel->InputStringFormat($_POST[$field]);                           
+                    }
+                }
+                $values['TransactionID'] = $this->crudModel->getRandom(10);
+                $values["Status"]=1; 
+                if($_POST['PaymentStatus']=='Failed'){
+                    $values["Status"]='0'; 
+                }
+                if($_POST['PaymentStatus']=='Created'){
+                    // echo "Created"; die();
+                    $values["Status"]='3'; 
+                }
+                
+                
+                                 
+                if(!empty($errors)){
+                    $this->sendOutput(
+                        json_encode(array("Status"=>0,"Message"=>"Please enter all fields","fields"=>$errors)),
+                        array('Content-Type: application/json', 'HTTP/1.1 200 OK')
+                    );
+                }
+                else{                    
+                        $responseData = $this->crudModel->add($this->table,$values);
+                        if($responseData){
+                            echo "1";
+                        }                       
+                        // $this->sendOutput(
+                        //     $responseData,
+                        //     array('Content-Type: application/json', 'HTTP/1.1 200 OK')
+                        // );
+                }
+            }
+        }        
     }
     public function makePayAction(){
      

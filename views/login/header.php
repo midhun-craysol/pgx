@@ -138,85 +138,13 @@
         border-color: transparent;
         box-shadow: 0 0 0 3px rgba(255, 255, 255, .25);
       }
-      .navbar{
-  z-index: 999;
-}
-.nav-item {
-        font-size:12 px;
-        text-transform:uppercase;
-        height:82px;
-        line-height:64px;        
-      }
-      .flare {
-        background:#ef662b;
-      }
-      .flare a.nav-link {
-        color:#fff !important
-      }
-      .topbarElements > div:nth-of-type(1){
-        font-size:48px;
-        margin:12px 32px;
-        color:#ef662b
-      }
-      @media screen and (min-width:1040px){
-        .flare { margin-right:-15px; }
-      }
-      @media screen and (max-width:1029px){
-        .navbar-nav {
-          margin-bottom:15px;
-          text-align:center
-        }
-        .nav-item {
-          background : rgba(255,255,255,0.1);
-          margin:2px;
-        }
-      }
-      .section-heading h6 {
-    font-size: 15px;
-    font-weight: 700;
-    color: #33ccc5;
-    text-transform: uppercase;
-    margin-bottom: 15px;    
-}
-.service-item{
-  padding: 30px 10px;
-}
+ 
 
 
-/* Style tab links */
-/* .tablink {
-  background-color: #555;
-  color: white;
-  float: left;
-  border: none;
-  outline: none;
-  cursor: pointer;
-  padding: 14px 16px;
-  font-size: 17px;
-  width: 15%;
-}
-
-.tablink:hover {
-  background-color: #777;
-} */
-
-/* Style the tab content (and add height:100% for full page content) */
-.tabcontent {
-  
-  display: none;
-  padding: 65px 20px;
-  height: 100%;
-}
-.pos-fix{ position: fixed;
-}
-.tablink {
-  border: 1px solid #c3c9c9;
-}
   </style>
     <script>
-    BASEURL="<?php echo(BASE_URL); ?>";
-    ASSETURL="<?php echo(ASSETS_URL); ?>";
-    ERP_BASE_URL="<?php echo(ERP_BASE_URL); ?>";
+    BASE_URL="<?php echo(BASE_URL); ?>";
+    ASSETS_URL="<?php echo(ASSETS_URL); ?>"; 
   </script>
   <body >
   <?php
@@ -229,10 +157,4 @@
     }
 
     ?>
-  <div class="pos-fix">
-    <button class="tablink" onclick="openPage('Terms', this, 'none')">Terms & Conditions</button>
-    <button class="tablink" onclick="openPage('Privacy', this, 'none')" >Privacy Policy</button>
-    <button class="tablink" onclick="openPage('Contact', this, 'none')">Contact</button>
-    <button class="tablink" onclick="openPage('Login', this, 'none')" id="defaultOpen">Login</button>
-  </div>
-   
+ 

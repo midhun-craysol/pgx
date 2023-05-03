@@ -1,0 +1,24 @@
+@font-face {
+    font-family: 'PoppinsRegular';
+    src: url('fonts/PoppinsRegular.eot');
+    src: url('fonts/PoppinsRegular.eot') format('embedded-opentype'),
+         url('fonts/PoppinsRegular.woff2') format('woff2'),
+         url('fonts/PoppinsRegular.woff') format('woff'),
+         url('fonts/PoppinsRegular.ttf') format('truetype'),
+         url('fonts/PoppinsRegular.svg#PoppinsRegular') format('svg');
+  }
+
+.login-links {
+    position: absolute;
+    width: 300px;
+    right: 0px;
+    top: 100px;
+    font-weight: bold;
+    font-size: 30px;    
+    color: #1c7cd7;
+    text-decoration: underline;
+    font-style: italic;
+}
+a.btn.login-links:hover {
+    color: #40bcc9;
+}

@@ -1,7 +1,7 @@
 $( document ).ready(function() { 
         $.ajax({
             type: 'POST',
-            url: BASEURL+'getProductLists',
+            url: BASE_URL+'getProductLists',
             data: {Yes:1},
             dataType: "json",
             success: function(resultData) { 
