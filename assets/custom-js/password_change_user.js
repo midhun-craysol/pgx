@@ -17,7 +17,7 @@ $(document).ready(function(){
             $(".modalLoader").show();
             $.ajax({
                 type: 'POST',
-                url:  BASEURL+"passwordUpdate",
+                url:  BASE_URL+"passwordUpdate",
                 data: formData,
                 dataType: "json",
                 success: function(resultData) {   
@@ -33,7 +33,7 @@ $(document).ready(function(){
 
 
                         setTimeout(()=> {
-                            window.location = BASEURL+"logout";
+                            window.location = BASE_URL+"logout";
                         }
                          ,3000);
                     }

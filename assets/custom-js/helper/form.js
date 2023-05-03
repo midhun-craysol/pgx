@@ -48,10 +48,10 @@ $(document).ready(function(){
 			if($("#"+addEditForm ).valid()){		
 				// console.log("______here 1");			
 				var msgResponse = " Creation";
-				var url = BASEURL+addUrl;
+				var url = BASE_URL+addUrl;
 				//Changing base Url if the case is edited.
 				if(($('#'+IdField).length)&&($('#'+addEditForm+' input[name="'+IdField+'"]').val()) && ($('#'+addEditForm+' input[name="'+IdField+'"]').val() !='')){			
-					url = BASEURL+updateUrl;						
+					url = BASE_URL+updateUrl;						
 					msgResponse = " Updation";					
 				}
 				var formData = $("#"+addEditForm).serialize();	
@@ -197,28 +197,28 @@ function alertBox(Status,Message,Page=""){
 	var imgStr = "";
 	var altStr="";
 	if(Status==-1) {
-		imgStr = ASSETURL+'/images/alert-icons/infoAlert.png';
+		imgStr = ASSETS_URL+'/images/alert-icons/infoAlert.png';
 		altStr = 'Info'; //operation can't delete
 	}
 	if(Status==0) {
-		imgStr = ASSETURL+'/images/alert-icons/FailAlert.png';
+		imgStr = ASSETS_URL+'/images/alert-icons/FailAlert.png';
 		altStr = 'FailAlert'; //operation perform fail
 	}
 	if(Status==1) {
-		imgStr = ASSETURL+'/images/alert-icons/SucessAlert.png';
+		imgStr = ASSETS_URL+'/images/alert-icons/SucessAlert.png';
 		altStr = 'Success'; //operation perform sucess
 	}
 	if(Status==2) {
-		imgStr = ASSETURL+'/images/alert-icons/WarningAlert.png';
+		imgStr = ASSETS_URL+'/images/alert-icons/WarningAlert.png';
 		altStr = 'Duplicate Entry';  // Operation 
 	}
 	if(Status==3) {
-		imgStr = ASSETURL+'/images/alert-icons/FailAlert.png';
+		imgStr = ASSETS_URL+'/images/alert-icons/FailAlert.png';
 		altStr = 'FailAlert';
 		Message += " - Invalid user type";
 	}
 	if(Status==4) {
-		imgStr = ASSETURL+'/images/alert-icons/WarningAlert.png';
+		imgStr = ASSETS_URL+'/images/alert-icons/WarningAlert.png';
 		altStr = 'Warning'; //Server not found
 		Message = "Server Not Found Error:404";
 	}
@@ -330,7 +330,7 @@ function fillTextsForEdit(formName,dataToFill){
 function bootboxAlert(MessageText){
 	      var titleStr = "Alert : PGX";
           var altStr = 'Info';
-          var imgStr = ASSETURL+'images/alert-icons/infoAlert.png';
+          var imgStr = ASSETS_URL+'images/alert-icons/infoAlert.png';
           var MessageData ="<div class='row'><div class='col-sm-2'><img src='"+imgStr+"' alt='"+altStr+"' width='50' height='50'><span style='padding:10px'></div><div class='col-sm-10'><div style='padding-top:10px;'><b> "+MessageText+"</b></div></span>"+"</div></div>";
           bootbox.alert(MessageData);
 }
@@ -341,7 +341,7 @@ function closeRequest(id){
 	var titleStr = "Alert :" +tabx;
 	var MessageText = "Do you want to Close Request?";
 	var altStr = 'Info';
-	var imgStr = ASSETURL+'/images/alert-icons/DeleteAlert.png';
+	var imgStr = ASSETS_URL+'/images/alert-icons/DeleteAlert.png';
 	var MessageData ="<div class='row'><div class='col-sm-2'><img src='"+imgStr+"' alt='"+altStr+"' width='30' height='30'><span style='padding:10px'></div><div class='col-sm-10'><div style='padding-top:10px;'><b>"+MessageText+"</b></div></span>"+"</div></div>";
 	bootbox.confirm({
 		title: titleStr,
@@ -358,7 +358,7 @@ function closeRequest(id){
 			if(result==true) {
 				$.ajax({
 					type: 'POST',
-					url: BASEURL+delUrl,
+					url: BASE_URL+delUrl,
 					data: delData,
 					dataType: "json",
 					success: function(resultData) { 
@@ -404,7 +404,7 @@ function handleDelete(delData,delUrl){
 			if(result==true) {
 				$.ajax({
 					type: 'POST',
-					url: BASEURL+delUrl,
+					url: BASE_URL+delUrl,
 					data: delData,
 					dataType: "json",
 					success: function(resultData) { 
@@ -461,7 +461,7 @@ function handleUnlink(delData,delUrl){
 			if(result==true) {
 				$.ajax({
 					type: 'POST',
-					url: BASEURL+delUrl,
+					url: BASE_URL+delUrl,
 					data: delData,
 					dataType: "json",
 					success: function(resultData) { 
@@ -507,7 +507,7 @@ function handleDelete2(delData,delUrl){
 			if(result==true) {
 				$.ajax({
 					type: 'POST',
-					url: BASEURL+delUrl,
+					url: BASE_URL+delUrl,
 					data: delData,
 					dataType: "json",
 					success: function(resultData) { 
@@ -557,7 +557,7 @@ function handleDelete1(delData,delUrl1){
 			if(result==true) {
 				$.ajax({
 					type: 'POST',
-					url: BASEURL+delUrl1,
+					url: BASE_URL+delUrl1,
 					data: delData,
 					dataType: "json",
 					success: function(resultData) { 
@@ -757,7 +757,7 @@ function handleEdit(url,id,handleSelect=true){
 	data[IdField] = id;	
 	$.ajax({
 		type: 'POST',
-		url: BASEURL+url,
+		url: BASE_URL+url,
 		data: data,
 		dataType: "json",
 		success: function(resultData) { 
@@ -850,7 +850,7 @@ function customModalReload(parent=false,tableReload=true){
 */
 function cray_xlt_transalation(TextReference){
 	var url = "\TransalationPluginLan";
-	var UrlFullPath = BASEURL+url;
+	var UrlFullPath = BASE_URL+url;
 	var TransalateText123 = ""
 	if(TextReference!="") {
 		$.ajax({
@@ -900,7 +900,7 @@ function handleCancel(cancelData,cancelUrl){
 			if(result==true) {
 				$.ajax({
 					type: 'POST',
-					url: BASEURL+cancelUrl,
+					url: BASE_URL+cancelUrl,
 					data: cancelData,
 					dataType: "json",
 					success: function(resultData) { 

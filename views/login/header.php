@@ -119,11 +119,11 @@
 
       .navbar .navbar-toggler {
         top: .25rem;
-        right: 1rem;
+        /* right: 1rem; */
       }
 
       .navbar .form-control {
-        padding: .75rem 1rem;
+        /* padding: .75rem 1rem; */
         border-width: 0;
         border-radius: 0;
       }
@@ -138,11 +138,13 @@
         border-color: transparent;
         box-shadow: 0 0 0 3px rgba(255, 255, 255, .25);
       }
+ 
+
+
   </style>
     <script>
-    BASEURL="<?php echo(BASE_URL); ?>";
-    ASSETURL="<?php echo(ASSETS_URL); ?>";
-    ERP_BASE_URL="<?php echo(ERP_BASE_URL); ?>";
+    BASE_URL="<?php echo(BASE_URL); ?>";
+    ASSETS_URL="<?php echo(ASSETS_URL); ?>"; 
   </script>
   <body >
   <?php
@@ -155,3 +157,4 @@
     }
 
     ?>
+ 

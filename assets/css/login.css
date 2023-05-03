@@ -125,4 +125,13 @@ body {
       background-color: white;
       padding: 10px;
     }
-   
+   .pt-50{
+    padding-top: 50px;
+   }
+   .bk-grey{
+    background-color: #100f0f47;
+    border-bottom: 3px solid white;
+   }
+   .pb-white{
+    border-bottom: 2px solid white;
+   }

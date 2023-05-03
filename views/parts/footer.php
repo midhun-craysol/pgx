@@ -23,7 +23,7 @@
 <script src="<?php echo(ASSETS_URL); ?>custom-js/password_change_user.js" ></script>
 
 <script>
-  var ASSETURL = "<?php echo(ASSETS_URL); ?>";
+  var ASSETS_URL = "<?php echo(ASSETS_URL); ?>";
   $(".submenu .nav-link ").on("click",function(e){
   routeURL = $(this).attr("href"); 
 
@@ -33,7 +33,7 @@
           type: 'POST',
           data:{dAccess:"dashboard"},
           dataType:"html",
-          url: BASEURL+routeURL,
+          url: BASE_URL+routeURL,
           success: function(resultData) {                          
             $("#mainContentArea").html(resultData);       
             var url= window.location.pathname; 
@@ -73,7 +73,7 @@
    });
   function LogOut()
   {    
-    var MessageData ="<div class='row'><div class='col-sm-2'><img src='"+ ASSETURL+"images/alert-icons/infoAlert.png' alt='Info' width='50' height='50'><span style='padding:10px'></div><div class='col-sm-10'><div style='padding-top:10px;'><b> Are you sure you want to logout?</b></div></span>"+"</div></div>";
+    var MessageData ="<div class='row'><div class='col-sm-2'><img src='"+ ASSETS_URL+"images/alert-icons/infoAlert.png' alt='Info' width='50' height='50'><span style='padding:10px'></div><div class='col-sm-10'><div style='padding-top:10px;'><b> Are you sure you want to logout?</b></div></span>"+"</div></div>";
   
     bootbox.confirm({
       title: "Alert : PGX",
@@ -88,7 +88,7 @@
       },
       callback: function (result) {
           if(result ==true){ 
-						window.location.href = BASEURL+"logout";	
+						window.location.href = BASE_URL+"logout";	
           }          
         }
       });
@@ -168,7 +168,7 @@ $("#theme").change(function() {
   var theme =$(this).val();
   $.ajax({
       type: 'POST',
-      url: BASEURL+"theme",
+      url: BASE_URL+"theme",
       data: {theme:theme},
       dataType: "json",         
       success: function(resultData) { 
@@ -235,7 +235,7 @@ $(document).ready(function(){
               type: 'POST', 
               data:{dAccess:"dashboard"},
               dataType:"html",
-              url: BASEURL+routeURL,
+              url: BASE_URL+routeURL,
               success: function(resultData) {                          
                 $("#mainContentArea").html(resultData); 
                 var url= window.location.pathname; 
@@ -260,7 +260,7 @@ $(document).ready(function(){
       $.ajax({
               type: 'POST', 
               data:{dAccess:"dashboard"},
-              url: BASEURL+routeURL,
+              url: BASE_URL+routeURL,
               dataType:"html",
               success: function(resultData) {                          
                 $("#mainContentArea").html(resultData); 

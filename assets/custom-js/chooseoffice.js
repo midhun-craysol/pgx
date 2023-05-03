@@ -5,16 +5,16 @@ $( document ).ready(function()
         $('.blink').fadeIn(500);
     }
     setInterval(blink_text, 1000); 
-    userOfficeList();
-    if($('#paymentGateway').length){
-        loadPayGs();  
-    }   
+    //userOfficeList();
+    // if($('#paymentGateway').length){
+    //     loadPayGs();  
+    // }   
    
 });
 function loadPayGs(){
     $.ajax({
         type: 'POST',
-        url: BASEURL+'loadPaygateByOffice',
+        url: BASE_URL+'loadPaygateByOffice',
         data: {yes:1},
         dataType: "json",
         success: function(resultData) { 
@@ -35,8 +35,8 @@ function loadPayGs(){
     });
 }
 function userOfficeList(){ 
-    var url = BASEURL+"userOfficeList";   
-    $('#userOfficeLink').empty();
+    var url = BASE_URL+"userOfficeList";   
+    $('#CompanyOfficeID').empty();
     $.ajax({
         type: 'POST',
         url: url,
@@ -46,21 +46,21 @@ function userOfficeList(){
             if(resultData.Status == "1"){
                 var des=resultData.data; 
                 let appentcontent="";
-                $('#userOfficeLink').empty();
+                $('#CompanyOfficeID').empty();
                 appentcontent="<option value=''>Select Office</option>";
                     $.each(des, function (i) {
                         var sel="";
                         
                         appentcontent =appentcontent+"<option value='"+des[i]['CompanyOfficeID']+"'"+sel+">"+des[i]['CompanyOfficeName']+"</option>"
                     });                     
-                $('#userOfficeLink').append(appentcontent);
+                $('#CompanyOfficeID').append(appentcontent);
                     
             }
             else{
                 
                 let appentcontent="";
                 appentcontent="<option value=''>Please Link</option>";
-                $('#userOfficeLink').append(appentcontent);
+                $('#CompanyOfficeID').append(appentcontent);
                 $('#officeToast span').text('Please Link an Office');
             }
         },
@@ -71,18 +71,22 @@ function userOfficeList(){
 
         
 }
-    $('#userOfficeLink').click(function() 
+    $('#CompanyOfficeID').click(function() 
     {    
         // $("#offSpan").removeClass("blink");  
     });
-    $('#userOfficeLink').blur(function() 
+    $('#CompanyOfficeID').blur(function() 
     {    
         // $("#offSpan").addClass("blink");  
     });
-    $('#userOfficeLink').change(function() 
+    $('#CompanyOfficeID').change(function() 
     {   
-        var userOfficeLinkID = $(this).val(); 
-        if(userOfficeLinkID=="") { 
+        var CompanyOfficeID = document.querySelector("#CompanyOfficeID");
+        var CompanyOfficeName = CompanyOfficeID.options[CompanyOfficeID.selectedIndex].getAttribute('data-name');
+        var CompanyOfficeID = $(this).val(); 
+        // var CompanyOfficeName = $(this).attr('data-name');
+        //alert(CompanyOfficeName); 
+        if(CompanyOfficeID=="") { 
                 $(".submenuBar").hide();
                 $("#siteTitle").hide();
                 $("#sitePage").hide();
@@ -95,16 +99,15 @@ function userOfficeList(){
                 $("#officeToast").hide();  
 
         }
-        var url = BASEURL+"setOfficeSession";   
-        $('#userOfficeLink').empty();
+        var url = BASE_URL+"setOfficeSession";   
+        $('#CompanyOfficeID').empty();
         $.ajax({
             type: 'POST',
             url: url,
-            data: {userOfficeLinkID:userOfficeLinkID},
+            data: {CompanyOfficeID:CompanyOfficeID,CompanyOfficeName:CompanyOfficeName},
             dataType: "text",
             success: function(resultData) { 
-                location.reload();                
-                
+                location.reload();  
             },
             error : function(error) { 
                 console.log(error);
@@ -112,7 +115,7 @@ function userOfficeList(){
         });
         $.ajax({
             type: 'POST',
-            url: BASEURL+'getProductLists',
+            url: BASE_URL+'getProductLists',
             data: {userOfficeLinkID:userOfficeLinkID},
             dataType: "json",
             success: function(resultData) { 
@@ -140,17 +143,18 @@ function userOfficeList(){
     { 
         
         var PayGateID = $(this).val(); 
+        var PaymentGatewayName = paymentGateway.options[paymentGateway.selectedIndex].getAttribute('data-name');
         if(PayGateID=="") { 
             $(".pgy").show(); 
         }
         else{  
             $(".pgy").hide();  
-            var url = BASEURL+"setPayGateSession";   
-            $('#userOfficeLink').empty();
+            var url = BASE_URL+"setPayGateSession";   
+            $('#CompanyOfficeID').empty();
             $.ajax({
                 type: 'POST',
                 url: url,
-                data: {PayGateID:PayGateID},
+                data: {PayGateID:PayGateID,PaymentGatewayName:PaymentGatewayName},
                 dataType: "text",
                 success: function(resultData) {                   
                     location.reload();      

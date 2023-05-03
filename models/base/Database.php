@@ -14,11 +14,12 @@ class Database
     public function __construct()
     {
         try {
-            if(isset($_SESSION['pgx']["UserID"])){
-                $this->connection = new mysqli(DB_HOST, USERNAME, DB_PASSWORD, DB_DATABASE_NAME);
-            }else{
-                $this->connection = new mysqli(ERP_DB_HOST, ERP_DB_USERNAME, ERP_DB_PASSWORD, ERP_DB_DATABASE_NAME);  
-            }
+           // if(isset($_SESSION['pgx']["UserID"])){
+                $this->connection = new mysqli(DB_HOST, DB_USERNAME, DB_PASSWORD, DB_DATABASE_NAME);
+            // }
+            // else{
+            //     $this->connection = new mysqli(ERP_DB_HOST, ERP_DB_USERNAME, ERP_DB_PASSWORD, ERP_DB_DATABASE_NAME);  
+            // }
             mysqli_query($this->connection,"SET CHARACTER SET 'utf8'");
             mysqli_query($this->connection,"SET SESSION collation_connection ='utf8_unicode_ci'");
             if ( mysqli_connect_errno()) {
