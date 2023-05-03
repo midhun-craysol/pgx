@@ -1,47 +1,74 @@
+tabx = "Craysol pgx : General / Transactions";
+IdField = "PaymentID";
+pageTable ="TransactionTable";
+ajaxUrl ="transactionList";
+formModalBox  = "transactionModal";	
+addEditForm = "transactionForm";
+addUrl = "addTransaction";	
+delUrl = "delTransaction";
+detailUrl = "TransactionDetails"; 
+updateUrl = "updateTransaction";
 
-tabx = "Craysol pgx : General / Craysol Users";
-IdField = "SysUserID";
-pageTable ="SysUserTable";
-ajaxUrl ="SysUserAjaxList";
-formModalBox  = "SysUserModal";	
-formModalBox1  = "changePasswordModal";	
-addEditForm = "SysUserForm";
-addUrl = "addSysUser";	
-detailUrl = "SysUserDetails";
-updateUrl = "updateSysUser"; 
-delUrl = "delSysUser";
+function delTransaction(id){
+    delData = {PaymentID:id};
+  handleDelete(delData,delUrl);
+}
+
 
 $(document).ready( function () {
- 
-    $('#TransactionSubmit').click(function(e){
-        alert('here');
-    });
+    columnstoShow =  ['PaymentID','TransactionID','RazorpayPaymentId','TotalAmount','Actions','ExtraPadding'];	
+    loadDataTableWithFilter(pageTable ,columnstoShow,ajaxUrl,[0,-2,-1,3],{});
+    DataTableFieldAligns([2,3]);
+
+    $('#StatusFilter').on('change',function(){ 
+        var filterObj={};   
+        var StatusFilter = $("#StatusFilter").val();
+        filterObj = {
+            filter :{               
+                "Status":StatusFilter
+            }
+        };  
+        filterObj['searchColumn']=$('#TPFilterIDSrch').val();
+        if(StatusFilter != ''){  
+            loadDataTableWithFilter(pageTable ,columnstoShow,ajaxUrl,[0,-2,-1,3],filterObj);
+            DataTableFieldAligns([2,3]);
+        } 
+        $('#TPFilterIDSrch').val()= "TransactionID";    
+        // if($('#TPFilterIDSrch').val()==""){        
+        //     $("#TransactionTable_filter").addClass("d-none");
+        // }else{
+        //     $("#TransactionTable_filter").removeClass("d-none");
+        // }
+    }); 
+
 	
 } );
 
-function payNow(){
-    var amount = 100;
-    var url = 'https://razorpay.me/@craysoltechnologiesipvtltd';
-    //alert(amount);
-    $.ajax({
-        type: 'POST',
-        url: url,
-        data: {Amount:amount},
-        dataType: "json",
-        success: function(resultData) { 
-            if(resultData){
-                console.log(resultData);
-            }          
+// function payNow(amount){
+//     // alert(amount);
+//     // var amount = 100;
+//     var url = 'https://razorpay.me/@craysoltechnologiesipvtltd';
+    
+//     //alert(amount);
+//     $.ajax({
+//         type: 'POST',
+//         url: url,
+//         data: {Amount:amount},
+//         dataType: "json",
+//         success: function(resultData) { 
+//             if(resultData){
+//                 console.log(resultData);
+//             }          
           
-        },
-        error : function(error) { 
+//         },
+//         error : function(error) { 
             
-        },
-        complete : function(){
-            $(".modalLoader").hide();
-        }
-    });
- }
+//         },
+//         complete : function(){
+//             $(".modalLoader").hide();
+//         }
+//     });
+//  }
  
 
    

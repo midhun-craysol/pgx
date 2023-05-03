@@ -340,8 +340,7 @@ class  CrudModel extends Database
                 $values = rtrim($values, ',');
             }
             $sqlQuery ="INSERT INTO `".$table."` ( ".$fields." ) VALUES (".$values.")"; 
-
-           
+            // echo $sqlQuery; die();
             $this->userlog($table,json_encode($values),"INSERTED");            
             $result = $this->db->executeStatement($sqlQuery);
             
@@ -892,5 +891,16 @@ class  CrudModel extends Database
             else{
                 echo json_encode(["Status"=>0,"Message" =>"Cancellation Failed"]);
             }       
+    }
+    function getRandom($n) {
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $randomString = '';
+     
+        for ($i = 0; $i < $n; $i++) {
+            $index = rand(0, strlen($characters) - 1);
+            $randomString .= $characters[$index];
+        }
+     
+        return $randomString;
     }
 }

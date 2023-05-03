@@ -65,7 +65,7 @@ $('#PasswordChangeFlg').change(function() {
         $(".help-block").hide();
         $.ajax({
             type: 'POST',
-            url: BASEURL+detailUrl,
+            url: BASE_URL+detailUrl,
             data: {SysUserID:SysUserID},
             dataType: "json",
             success: function(resultData) { 
@@ -188,7 +188,7 @@ $(document).ready( function () {
          e.preventDefault();			
         if($( "#changePasswordForm2").valid()){				
             var msgResponse = " Updation";
-            var url = BASEURL+"changePassword";
+            var url = BASE_URL+"changePassword";
             var formData = $("#changePasswordForm2").serialize();
             handleUpdatePassword(url,formData,msgResponse);
         }

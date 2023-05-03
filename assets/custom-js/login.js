@@ -17,7 +17,7 @@ $(document).ready(function(){
 			var code = $('#loginForm input[name="code"]').val();
 			$.ajax({
 					type: 'POST',
-					url: BASEURL+"verifyUser",
+					url: BASE_URL+"verifyUser",
 					data: {Username:Username,code:code},
 					dataType: "json",
 					success: function(resultData) { 
@@ -39,6 +39,7 @@ $(document).ready(function(){
 		e.preventDefault();	
 		var uname = document.getElementById("UserName").value;
 		var pwdusr = document.getElementById("UserPassword").value;
+		var api = 'erpx666';
 		if(uname=="")
 		{
 			document.getElementById("err1").innerHTML = "Please enter user name";
@@ -50,7 +51,6 @@ $(document).ready(function(){
 		if(pwdusr=="")
 		{
 			document.getElementById("err2").innerHTML = "Please enter password";
-			
 
 		}
 		else
@@ -65,17 +65,14 @@ $(document).ready(function(){
 		var formData = $("#loginForm").serialize();
 		$.ajax({
 			type: 'POST',
-			url: BASEURL+"verifyLogin",
-			data: formData,
+			url: "http://localhost/erpx/Api_extUserLogin",
+			data: {UserName:uname, UserPassword:pwdusr, ApiKey:api},
 			dataType: "json",
-			success: function(resultData) { 
-				
-				
+			success: function(resultData) {  				
 				if(resultData.Status == "1"){ 
-					window.location = BASEURL+'';	
+					setSession(resultData);
 				} else { 
-					document.getElementById("err3").innerHTML = "Invalid UserName/Password";
-
+					document.getElementById("err3").innerHTML = "Invalid UserName/Password"; 
 				}
 			},
 			error : function(error) { 
@@ -85,3 +82,20 @@ $(document).ready(function(){
 	}	
 	});
 });
+ function setSession(resultData){
+	$.ajax({
+		type: 'POST',
+		url: BASE_URL+"setSession",
+		data: {resultData:resultData},
+		dataType: "json",
+		success: function(resultData1) { 		
+			
+			if(resultData1 == "1"){ 
+				window.location = BASE_URL+'';	
+			} 
+		},
+		error : function(error) { 
+			
+		}
+	});	
+ }
