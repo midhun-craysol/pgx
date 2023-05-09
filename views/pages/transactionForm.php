@@ -50,3 +50,43 @@
   
       </div>
     </div> 
+
+
+    <div class="modal fade" id="ViewPaymentModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" style="z-index: 9999 !important;">
+            <div class="modal-dialog">
+                <div class="modal-content modalwid">
+                <div class="modal-header">
+                    <h6 class="modal-title" id="exampleModalLabel">Transaction Details</h6>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                        <div class="row">
+                          <table>
+                            <tr>
+                              <td><label>Transaction ID </label></td><td>:</td><td><span id="TransactionID"></span></td>
+                            </tr> 
+                            <tr>
+                              <td>Transaction Time</td><td>:</td><td><span id="TransactionTime"></span></td>
+                            </tr>
+                            <tr>
+                              <td>Total Amount </td><td>:</td><td><span id="TotalAmount"></span></td>
+                            </tr>
+                            <tr>
+                              <td>Transaction Status</td><td>:</td><td><span id="Status"></span></td>
+                            </tr>
+
+                           
+                          </table>
+                           
+                            <!-- <div class="col-5">                            
+                              <label>TransactionID </label>
+                            </div>
+                            <div class="col-7">
+                          
+                            </div> -->
+                        </div>
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>

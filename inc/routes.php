@@ -26,7 +26,10 @@
   $routes['userOfficeList'] = "Helper/userOfficeList";
   $routes['setSession'] = "User/setSession";
   $routes['addpayment'] = "Payment/addpayment";
-   
+  // $routes['checkouturl'] = "Payment/checkoutdetails";
+  $routes['viewPaymentDetail'] = "Payment/checkoutdetails";
+  
+  
 
   
   

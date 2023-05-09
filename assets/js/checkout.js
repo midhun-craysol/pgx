@@ -2,12 +2,15 @@
     var totalAmount = $(this).attr("data-amount");
     var compid = $("#compid").attr("data-val");
     var product_id = "gps";
+    var TransactionID = "Pay_"+product_id+randomString(13, '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ');
+    // alert(TransactionID);
     var options = {
-    "key": "rzp_test_JO0rZxWxT7QO02",
+    "key": "rzp_test_f0Naiu31auHzo1", //rzp_test_JO0rZxWxT7QO02
     "amount": (totalAmount*100), // 2000 paise = INR 20
     "name": "Craysol",
     "description": "Payment",
     "callback_url": BASE_URL+"",
+    // "callback_url": BASE_URL+"checkouturl",
     "redirect":false,
     // "image": "//www.tutsmake.com/wp-content/uploads/2018/12/cropped-favicon-1024-1-180x180.png",
     "handler": function (response){
@@ -17,11 +20,12 @@
     type: 'post',
     dataType: 'json',
     data: {
-    RazorpayPaymentId: response.razorpay_payment_id , TotalAmount : totalAmount ,ProductId : product_id, CompanyOfficeID:compid, PaymentStatus:"Success",
+    RazorpayPaymentId: response.razorpay_payment_id , TotalAmount : totalAmount ,ProductId : product_id, CompanyOfficeID:compid, TransactionID:TransactionID, PaymentStatus:"Success",
     }, 
     success: function (msg) {        
       if(msg=1){
-        window.location.href = BASE_URL+"";
+        // window.location.href = BASE_URL+"";
+        toSuccess(TransactionID);
       }      
     },
     error: function (msg){
@@ -47,7 +51,7 @@
         type: 'post',
         dataType: 'json',
         data: {
-        RazorpayPaymentId: paymentID , TotalAmount : totalAmount ,ProductId : product_id, CompanyOfficeID:compid, PaymentStatus:"Failed",
+        RazorpayPaymentId: paymentID , TotalAmount : totalAmount ,ProductId : product_id, CompanyOfficeID:compid, TransactionID:TransactionID, PaymentStatus:"Failed",
       }, 
       success: function (msg) {
       // if(msg=1){
@@ -63,6 +67,41 @@
 
     e.preventDefault();
 });
+
+function randomString(length, chars) {
+  var result = '';
+  for (var i = length; i > 0; --i) result += chars[Math.floor(Math.random() * chars.length)];
+  return result;
+}
+
+function toSuccess(TransactionID){
+  //  alert("success:TransactionID="+TransactionID);
+  $.ajax({
+    type: 'POST',
+    url: BASE_URL+"viewPaymentDetail",
+    data: {TransactionID:TransactionID},
+    dataType: "json",
+    success: function(resultData) { 
+        if(resultData.data){ 
+            dat = resultData.data; 
+           
+            console.log(dat);
+             $("#TransactionID").html(dat.TransactionID);
+             $("#TransactionTime").html(dat.TransactionTime);
+             $("#TotalAmount").html(dat.TotalAmount);
+             var sts = 'Failed';
+             if(dat.Status==1){
+              sts = "Success";
+             }
+             $("#Status").html(sts);
+            $('#ViewPaymentModal').modal('show');
+        }
+    },
+    error : function(error) { 
+        console.log(error);
+    }
+  });
+}
 
 //---------------------------------------------------------------------------------
 !(function () {

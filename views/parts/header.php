@@ -257,9 +257,18 @@
                 <li>
                     <a class="nav-link" href="transtatus">Check Tran Status<i class="fa fa-chevron-circle-plus"></i></a>
                 </li>
+                <?php if ($_SESSION['pgx']["PaymentGatewayName"]=='Razorpay'){
+                ?>
                 <li>
-                  <a class="nav-link" href="newTran">New Tran  <i class="fa fa-chevron-circle-plus"></i> </a>
+                  <a class="nav-link" href="newTran">New Tran - <?php echo $_SESSION['pgx']["PaymentGatewayName"]; ?> <i class="fa fa-chevron-circle-plus"></i> </a>
                 </li>
+                <?php
+                }
+                ?>
+                <!-- ProcessURL <?php //echo $_SESSION['pgx']["ProcessURL"]; ?>-->
+                <!-- <li>
+                  <a class="nav-link" href="newTran">New Tran  <i class="fa fa-chevron-circle-plus"></i> </a>
+                </li> -->
                 <li>
                   <a class="nav-link" href="">Send SMS Link  <i class="fa fa-chevron-circle-plus"></i> </a>
                 </li>
