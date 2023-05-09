@@ -99,7 +99,7 @@ class TransactionController  extends  UserBaseController
                 ]; 
             $this->loadView("pages/transactionForm",[],$vars);  
             $starttime = microtime(true);      
-            $data["scripts"] = ["transaction"];        
+            $data["scripts"] = ["transaction","helper/table","helper/form"];        
             $this->loadView("parts/plain",$data,$menuData); 
             $endtime = microtime(true); 
             echo("<span  class='loadTimeRoad'; > #0004 - <lable>".round(($endtime - $starttime),4)." Sec </label>".round((microtime(true) - $timeStart),4)." Sec </span>");                  
