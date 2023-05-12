@@ -3,7 +3,6 @@
     var compid = $("#compid").attr("data-val");
     var product_id = "gps";
     var TransactionID = "Pay_"+product_id+randomString(13, '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ');
-    // alert(TransactionID);
     var options = {
     "key": "rzp_test_f0Naiu31auHzo1", //rzp_test_JO0rZxWxT7QO02
     "amount": (totalAmount*100), // 2000 paise = INR 20
@@ -14,7 +13,6 @@
     "redirect":false,
     // "image": "//www.tutsmake.com/wp-content/uploads/2018/12/cropped-favicon-1024-1-180x180.png",
     "handler": function (response){
-      // console.log(response);
     $.ajax({
     url: BASE_URL+"addpayment",
     type: 'post',
@@ -85,7 +83,7 @@ function toSuccess(TransactionID){
         if(resultData.data){ 
             dat = resultData.data; 
            
-            console.log(dat);
+            // console.log(dat);
              $("#TransactionID").html(dat.TransactionID);
              $("#TransactionTime").html(dat.TransactionTime);
              $("#TotalAmount").html(dat.TotalAmount);

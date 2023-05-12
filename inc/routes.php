@@ -28,6 +28,7 @@
   $routes['addpayment'] = "Payment/addpayment";
   // $routes['checkouturl'] = "Payment/checkoutdetails";
   $routes['viewPaymentDetail'] = "Payment/checkoutdetails";
+  // $routes['sendsms'] = "Payment/sendSMS";
   
   
 

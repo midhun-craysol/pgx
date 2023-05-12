@@ -15,5 +15,6 @@ include(PROJECT_ROOT_PATH . "/controllers/base/UserBaseController.php");
  
 // include the use model file
 include(PROJECT_ROOT_PATH . "/models/base/CrudModel.php");
+include(PROJECT_ROOT_PATH.'/razorpay_php/Razorpay.php');
 
 ?>
